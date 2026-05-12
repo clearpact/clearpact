@@ -1,0 +1,18 @@
+node_modules/
+.env
+.env.*
+*.log
+dist/
+build/
+artifacts/
+
+# Foundry
+out/
+cache/
+broadcast/
+
+coverage/
+.DS_Store
+*.key
+*.pem
+secrets/

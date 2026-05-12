@@ -1,0 +1,24 @@
+[profile.default]
+src = "contracts"
+out = "out"
+libs = ["lib"]
+test = "test"
+cache_path = "cache"
+
+solc_version = "0.8.28"
+evm_version = "cancun"
+optimizer = true
+optimizer_runs = 200
+
+# These settings reproduce the bytecode of the contract currently deployed on
+# Base Sepolia (0xe1E45CD17FdEe0C38b011FDDA25B259B26140DB0). They were
+# confirmed by decoding the CBOR metadata embedded in the deployed bytecode
+# and recompiling for byte-for-byte match (modulo the metadata IPFS hash,
+# which differs and yields a Sourcify *partial* match — see tech_notes.md).
+#
+# Pinned solc compiler: v0.8.28+commit.7893614a
+
+[fmt]
+line_length = 120
+tab_width = 4
+bracket_spacing = true

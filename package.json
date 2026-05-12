@@ -1,0 +1,20 @@
+{
+  "name": "clearpact-contracts",
+  "version": "1.0.0",
+  "description": "ClearPactEscrow — on-chain escrow for conditional USDC payments on Base. Solidity source and ABI.",
+  "license": "MIT",
+  "files": [
+    "contracts",
+    "abi",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "solidity",
+    "escrow",
+    "usdc",
+    "base",
+    "ethereum",
+    "smart-contract"
+  ]
+}
