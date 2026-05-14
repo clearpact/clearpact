@@ -1,18 +1,84 @@
-node_modules/
+# Polsia safety (auto-injected)
+.claude/
+.claude.json*
+projects/
+*.jsonl
+
+# ─── Polsia internal scaffolding (CRITIQUE — Day 42 list) ────────────
+debug/
+shell-snapshots/
+todos/
+session-env/
+.tmp/
+.polsia/
+*.polsia-internal
+*.polsia-meta
+
+# ─── Polsia backend overlay (Day 44 — NE PAS publier sur repo contracts) ─
+# Le zip Polsia inclut tout le backend Express.js + scaffolding deploy.
+# Ce repo public ne publie que les contrats Solidity (cf. package.json HEAD).
+middleware/
+routes/
+services/
+scripts/
+sdk/
+public/
+test-fixtures/
+server.js
+migrate.js
+verify-auth.js
+verify-escrow.js
+verify-expiry.js
+render.yaml
+package-lock.json
+.npmrc
+.nvmrc
+CLAUDE.md
+
+# ─── Secrets / credentials (CRITIQUE) ────────────────────────────────
 .env
 .env.*
-*.log
-dist/
-build/
-artifacts/
+!.env.example
+*.pem
+*.key
+*.keystore
+secrets/
+credentials.json
+*_SECRET*
+*_PRIVATE_KEY*
 
-# Foundry
+# ─── Foundry / Solidity build artifacts ──────────────────────────────
+contracts/out/
+contracts/cache/
+contracts/lib/forge-std/
+contracts/.gas-snapshot
+contracts/lib/
+
 out/
 cache/
 broadcast/
 
-coverage/
+# ─── Node.js / npm ───────────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ─── PostgreSQL / backend ────────────────────────────────────────────
+*.sql.backup
+*.db
+data/
+
+# ─── IDE / editor ────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
 .DS_Store
-*.key
-*.pem
-secrets/
+Thumbs.db
+
+# ─── Build outputs ────────────────────────────────────────────────────
+dist/
+build/
+*.log

@@ -1,13 +1,13 @@
 {
   "name": "clearpact-contracts",
-  "version": "1.0.0",
-  "description": "ClearPactEscrow — on-chain escrow for conditional USDC payments on Base. Solidity source and ABI.",
+  "version": "1.1.0",
+  "description": "ClearPact on-chain escrow contracts on Base — v1 ClearPactEscrow (deployed Sepolia) + v2 ClearPactJob (ERC-8183 compliant). Solidity sources, ABIs, and Foundry profile.",
   "license": "MIT",
   "files": [
     "contracts",
-    "abi",
     "LICENSE",
-    "README.md"
+    "README.md",
+    "tech_notes.md"
   ],
   "keywords": [
     "solidity",
@@ -15,6 +15,9 @@
     "usdc",
     "base",
     "ethereum",
-    "smart-contract"
+    "smart-contract",
+    "erc-8183",
+    "agentic-payments",
+    "programmable-escrow"
   ]
 }
