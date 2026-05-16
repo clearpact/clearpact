@@ -1,0 +1,25 @@
+## ClearPactJob Storage Layout — BEFORE Phase 2bis (Phase 2 / commit 55ab185)
+## Generated from source inspection of ClearPactJob.sol at Phase 2 baseline.
+## Note: forge inspect ClearPactJob storage-layout cannot run in this environment
+##       (Foundry requires ~/.foundry which is blocked by sandbox).
+##       This is a source-derived layout — CI forge build will confirm.
+
+| Slot | Variable                  | Type                            | Notes                                       |
+|------|---------------------------|---------------------------------|---------------------------------------------|
+| 0    | _initialized/_initializing | uint8+bool (OZ initializer)    | Inherited OZ InitializableUpgradeable       |
+| 1-n  | AccessControl internals    | mapping(bytes32=>RoleData)      | Inherited                                   |
+| ...  | Pausable internal          | bool _paused                    | Inherited PausableUpgradeable               |
+| ...  | _jobs                      | mapping(uint256 => Job)         |                                             |
+| ...  | _jobTokens                 | mapping(uint256 => address)     |                                             |
+| ...  | _jobConditionRefs          | mapping(uint256 => bytes32)     |                                             |
+| ...  | _jobCreatedAt              | mapping(uint256 => uint256)     |                                             |
+| ...  | _jobFundedAt               | mapping(uint256 => uint256)     |                                             |
+| ...  | _jobSettledAt              | mapping(uint256 => uint256)     |                                             |
+| ...  | _jobCounter                | uint256                         |                                             |
+| ...  | platformFeeBP              | uint256                         |                                             |
+| ...  | treasury                   | address                         |                                             |
+| ...  | evaluatorFeeBP             | uint256                         |                                             |
+| ...  | whitelistedHooks           | mapping(address => bool)        |                                             |
+| X    | __gap                      | uint256[50]                     | 50 reserved slots                           |
+
+Total custom slots (excluding inherited): __gap occupies slots X through X+49.

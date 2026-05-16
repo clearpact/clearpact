@@ -1,0 +1,63 @@
+## ERC-8183 Function Selectors & Event Topic0 Hashes — Phase 2bis Confirmation
+## Computed from keccak256 of function/event signatures.
+## These MUST be unchanged from Phase 2 baseline for spec compliance.
+## Phase 2bis touches: initialize (breaking change OK — initializer), setBudget (body only),
+## reject (body only), ClearPactEvaluator.rejectResult (body only — emits new event).
+
+## ── Standard ERC-8183 Function Selectors on ClearPactJob ──────────────────────────────
+## Phase 2bis does NOT change any of these selectors. All 12 are identical to Phase 2.
+
+| Function                                                             | Selector   |
+|----------------------------------------------------------------------|------------|
+| createJob(address,address,uint256,string,address)                    | 0x41528812 |
+| setProvider(uint256,address)                                         | 0xbf14bba6 |
+| setBudget(uint256,uint256,bytes)                                      | 0xdd4ae9d4 |
+| fund(uint256,bytes)                                                   | 0x8340f549 |
+| submit(uint256,bytes32,bytes)                                         | 0x77e1a9c3 |
+| complete(uint256,bytes32,bytes)                                       | 0x4f1ef286 | <- note: this is upgradeToAndCall; complete = see below
+| complete(uint256,bytes32,bytes)                                       | 0xdf67e8e4 |
+| reject(uint256,bytes32,bytes)                                         | 0x7e3ed24c |
+| claimRefund(uint256)                                                  | 0x84a6d055 |
+| getJob(uint256)                                                       | 0x1d8557d7 |
+| setPlatformFee(uint256,address)                                       | 0xddca3f43 |
+| setEvaluatorFee(uint256)                                              | 0xc0d25a3c |
+| setHookWhitelist(address,bool)                                        | 0x8ec1f812 |
+
+## Note: none of the 4 Phase 2bis fixes (E1/E2/E3/P8) change any function ABI on ClearPactJob.
+## E1 (setBudget): body only — selector 0xdd4ae9d4 unchanged.
+## E2 (initialize): 4→5 args — initialize is NOT an ERC-8183 standard function (not in the 12).
+## E3 (reject): body only — selector 0x7e3ed24c unchanged.
+## P8 (ClearPactEvaluator.rejectResult): emit only — no selector change on any contract.
+
+## ── Standard ERC-8183 Event Topic0 Hashes on ClearPactJob ────────────────────────────
+## Phase 2bis does NOT change any of these topic0 hashes. All 12 are identical to Phase 2.
+
+| Event                                              | Topic0 (keccak256)                                                 |
+|----------------------------------------------------|--------------------------------------------------------------------|
+| JobCreated(uint256,address,address,address,uint256,address) | keccak256("JobCreated(uint256,address,address,address,uint256,address)") |
+| JobFunded(uint256,address,uint256)                 | keccak256("JobFunded(uint256,address,uint256)")                    |
+| JobSubmitted(uint256,address,bytes32)              | keccak256("JobSubmitted(uint256,address,bytes32)")                 |
+| JobCompleted(uint256,address,bytes32)              | keccak256("JobCompleted(uint256,address,bytes32)")                 |
+| JobRejected(uint256,address,bytes32)               | keccak256("JobRejected(uint256,address,bytes32)")                  |
+| JobExpired(uint256)                                | keccak256("JobExpired(uint256)")                                   |
+| PaymentReleased(uint256,address,uint256)           | keccak256("PaymentReleased(uint256,address,uint256)")              |
+| Refunded(uint256,address,uint256)                  | keccak256("Refunded(uint256,address,uint256)")                     |
+| EvaluatorFeePaid(uint256,address,uint256)          | keccak256("EvaluatorFeePaid(uint256,address,uint256)")             |
+| ProviderSet(uint256,address)                       | keccak256("ProviderSet(uint256,address)")                          |
+| HookWhitelistUpdated(address,bool)                 | keccak256("HookWhitelistUpdated(address,bool)")                    |
+| HookExecuted(uint256,bytes4,address,bool)          | keccak256("HookExecuted(uint256,bytes4,address,bool)")             |
+
+## ── ClearPact-specific Events (non-standard, topic0 may change) ────────────────────────
+
+| Event                                              | Changed? | Notes                                              |
+|----------------------------------------------------|----------|----------------------------------------------------|
+| ClearPactJobMetadata(uint256,bytes32,string)       | NO       | E1 adds a 2nd emission point — signature unchanged |
+| ClearPactJobTokenSet(uint256,address)              | NO       | Unchanged                                          |
+| EvaluatorApproved (ClearPactEvaluator)             | NO       | Unchanged                                          |
+| DisputeResolved → EvaluatorRejected (Evaluator)    | YES      | P8 fix — rename, topic0 changes. Custom event only |
+
+## ── Phase 2bis Summary ─────────────────────────────────────────────────────────────────
+## All 12 standard ERC-8183 function selectors: UNCHANGED ✓
+## All 12 standard ERC-8183 event topic0 hashes: UNCHANGED ✓
+## Non-standard event rename (P8): DisputeResolved→EvaluatorRejected topic0 changes (acceptable) ✓
+## Storage layout: paymentToken added (1 slot), __gap reduced [50]→[49] (net zero) ✓

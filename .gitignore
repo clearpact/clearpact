@@ -1,0 +1,22 @@
+node_modules/
+.env
+.DS_Store
+
+# Polsia safety (auto-injected)
+.env
+.env.*
+.claude/
+.claude.json*
+projects/
+*.jsonl
+
+# Owner-side safety (added for public push)
+.tmp/
+debug/
+shell-snapshots/
+todos/
+session-env/
+*.swp
+*.log
+.idea/
+.vscode/

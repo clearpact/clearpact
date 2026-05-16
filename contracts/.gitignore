@@ -1,0 +1,6 @@
+# Foundry build artifacts
+out/
+cache/
+
+# OZ and other deps are managed via forge install (git submodules)
+# lib/ tracked but populated by setup-deps.sh

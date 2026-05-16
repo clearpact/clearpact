@@ -1,0 +1,34 @@
+## ClearPactJob Storage Layout — AFTER Phase 2bis (E2 fix applied)
+## Generated from source inspection of ClearPactJob.sol at Phase 2bis.
+## Note: forge inspect ClearPactJob storage-layout cannot run in this environment
+##       (Foundry requires ~/.foundry which is blocked by sandbox).
+##       This is a source-derived layout — CI forge build will confirm.
+
+| Slot | Variable                  | Type                            | Notes                                       |
+|------|---------------------------|---------------------------------|---------------------------------------------|
+| 0    | _initialized/_initializing | uint8+bool (OZ initializer)    | Inherited OZ InitializableUpgradeable       |
+| 1-n  | AccessControl internals    | mapping(bytes32=>RoleData)      | Inherited                                   |
+| ...  | Pausable internal          | bool _paused                    | Inherited PausableUpgradeable               |
+| ...  | _jobs                      | mapping(uint256 => Job)         |                                             |
+| ...  | _jobTokens                 | mapping(uint256 => address)     |                                             |
+| ...  | _jobConditionRefs          | mapping(uint256 => bytes32)     |                                             |
+| ...  | _jobCreatedAt              | mapping(uint256 => uint256)     |                                             |
+| ...  | _jobFundedAt               | mapping(uint256 => uint256)     |                                             |
+| ...  | _jobSettledAt              | mapping(uint256 => uint256)     |                                             |
+| ...  | _jobCounter                | uint256                         |                                             |
+| ...  | platformFeeBP              | uint256                         |                                             |
+| ...  | treasury                   | address                         |                                             |
+| ...  | evaluatorFeeBP             | uint256                         |                                             |
+| ...  | whitelistedHooks           | mapping(address => bool)        |                                             |
+| X    | paymentToken               | address                         | NEW (E2 fix) — occupies 1 slot (address)    |
+| X+1  | __gap                      | uint256[49]                     | Reduced from [50] to [49] (E2 fix)          |
+
+## Key safety invariant:
+## - paymentToken consumes exactly ONE slot (address = 20 bytes, packs into one 32-byte slot).
+## - __gap reduced from [50] to [49] to compensate. Net reserved capacity unchanged.
+## - No existing variable shifts. All previously-deployed state at slots 0..X-1 is unaffected.
+## - This is the only storage change in Phase 2bis.
+
+## Diff summary (only change vs Phase 2 baseline):
+## + paymentToken  address  (new, 1 slot)
+## ~ __gap[50] → __gap[49] (reduced by 1)
